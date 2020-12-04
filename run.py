@@ -34,7 +34,9 @@ async def patch_author_name(name: str = Body(..., embed=True)):
 
 
 @app.post("/users/authors")
-async def post_user_and_author(user: User, author: Author):
+async def post_user_and_author(
+    user: User, author: Author, bookstore_name: str = Body(..., embed=True)
+):
     return {"user": user, "author": author}
 
 
