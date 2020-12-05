@@ -9,16 +9,14 @@ from starlette import status
 from starlette import exceptions
 from fastapi.security import OAuth2PasswordRequestForm
 
-from utils.security import authenticate_user, create_jwt_token, check_jwt_token
+from utils.security import authenticate_user, create_jwt_token
 
 app_v1 = FastAPI(root_path="/v1")
 
 
 @app_v1.post("/users", status_code=status.HTTP_201_CREATED)
 async def post_user(
-    user: User,
-    x_custom: str = Header(""),
-    jwt: bool = Depends(check_jwt_token),
+    user: User, x_custom: str = Header(""),
 ):
     if user is None:
         raise exceptions.HTTPException(
@@ -87,7 +85,6 @@ async def login_for_access_token(
         "username": form_data.username,
         "password": form_data.password,
     }
-    print(jwt_user_dict)
     jwt_user = JWTUser(**jwt_user_dict)
     user = authenticate_user(jwt_user)
     if user is None:
