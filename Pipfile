@@ -9,6 +9,9 @@ verify_ssl = true
 fastapi = "*"
 uvicorn = "*"
 python-multipart = "*"
+pyjwt = "*"
+passlib = "*"
+bcrypt = "*"
 
 [requires]
 python_version = "3.8"

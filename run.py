@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-
 from routes.v1 import app_v1
+from passlib.context import CryptContext
 
 app = FastAPI()
 
