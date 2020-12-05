@@ -3,13 +3,16 @@ import enum
 from fastapi import Query
 
 
-class Role(enum.Enum):
-    admin = "admin"
-    personal = "personal"
+class Role(str, enum.Enum):
+    admin: str = "admin"
+    personal: str = "personal"
 
 
 class User(BaseModel):
     name: str
     password: str
-    mail: str = Query(..., regex=r"[\w\.-]+@[\w\.-]+(\.[\w]+)+")
+    mail: str = Query(
+        ...,
+        regex=r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$",
+    )
     role: Role

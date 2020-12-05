@@ -2,12 +2,10 @@ import datetime
 import time
 
 import jwt
-from fastapi import Depends, HTTPException
+from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 from passlib.exc import UnknownHashError
-from starlette import status
-from starlette.status import HTTP_401_UNAUTHORIZED
 
 from models.jwt_users import JWTUser
 from utils.consts import (
