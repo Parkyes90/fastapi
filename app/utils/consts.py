@@ -3,3 +3,12 @@ JWT_SECRET_KEY = (
 )
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRATION_TIME_MINUTE = 60 * 24 * 5
+
+DB_HOST = "localhost"
+DB_USER = "postgres"
+DB_PASSWORD = "password"
+DB_NAME = "app"
+DB_PORT = 5432
+DB_URL = (
+    f"postgresql://{DB_NAME}:{DB_PASSWORD}" f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+)

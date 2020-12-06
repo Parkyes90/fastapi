@@ -12,6 +12,7 @@ python-multipart = "*"
 pyjwt = "*"
 passlib = "*"
 bcrypt = "*"
+databases = "*"
 
 [requires]
 python_version = "3.8"
