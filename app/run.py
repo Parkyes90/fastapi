@@ -10,7 +10,11 @@ from routes.v1 import app_v1
 from starlette.requests import Request
 
 from routes.v2 import app_v2
-from utils.security import check_jwt_token, authenticate_user, create_jwt_token
+from utils.security import (
+    check_jwt_token,
+    authenticate_user,
+    create_jwt_token,
+)
 
 app = FastAPI(
     title="Bookstore API Documentation",

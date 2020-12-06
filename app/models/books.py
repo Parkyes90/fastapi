@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Schema
 
-from models.Authors import Author
+from .authors import Author
 
 
 class Book(BaseModel):
