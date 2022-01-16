@@ -4,3 +4,4 @@ services:
     build: ./services/api
     volumes:
       - ./services/api:/home/api/app
+    command: python main.py

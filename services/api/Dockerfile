@@ -1,8 +1,5 @@
 FROM python:3.10-alpine
 
-ARG DEBIAN_FRONTEND=noninteractive
-
-
 # env
 ENV USER=api \
     HOME=/home/api
@@ -20,7 +17,7 @@ RUN adduser \
     "$USER"
 
 USER api
-
+WORKDIR $HOME/app
 
 ## python deps
 RUN python -m pip install --upgrade pip
@@ -32,6 +29,5 @@ ENV PYTHONUNBUFFERED 1
 RUN cd /tmp && pipenv lock -d --requirements > requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
-COPY . $HOME/app
 
-CMD ["uvicorn", "main:app", "--reload"]
+COPY . $HOME/app
