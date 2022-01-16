@@ -54,5 +54,3 @@ COPY . $HOME/app
 # Clean
 USER root
 RUN rm -rf /root/.cache/pip && apt-get clean
-
-
