@@ -5,3 +5,5 @@ services:
     volumes:
       - ./services/api:/home/api/app
     command: python main.py
+    ports:
+      - "8080:8000"
