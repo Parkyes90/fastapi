@@ -1,6 +1,13 @@
 from fastapi import FastAPI
+from enum import Enum
 
 app = FastAPI()
+
+
+class BlogType(str, Enum):
+    short = "short"
+    story = "story"
+    howto = "howto"
 
 
 @app.get("/")
@@ -11,6 +18,11 @@ def index():
 @app.get("/blog/all")
 def get_all_blogs():
     return {"message": "All blogs"}
+
+
+@app.get("/blog/type/{blog_type}")
+def get_blog_type(blog_type: BlogType):
+    return {"message": f"Blog type {blog_type}"}
 
 
 @app.get("/blog/{blog_id}")
