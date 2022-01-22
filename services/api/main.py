@@ -5,7 +5,12 @@ app = FastAPI()
 
 @app.get("/")
 def index():
-    return "Hello world123"
+    return {"message": "Hello World"}
+
+
+@app.get("/blog/{blog_id}")
+def get_blog(blog_id: int):
+    return {"message": f"Blog with id {blog_id}"}
 
 
 if __name__ == "__main__":
