@@ -8,6 +8,11 @@ def index():
     return {"message": "Hello World"}
 
 
+@app.get("/blog/all")
+def get_all_blogs():
+    return {"message": "All blogs"}
+
+
 @app.get("/blog/{blog_id}")
 def get_blog(blog_id: int):
     return {"message": f"Blog with id {blog_id}"}
