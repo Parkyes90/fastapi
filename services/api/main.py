@@ -43,7 +43,11 @@ def get_blog_type(blog_type: BlogType):
     return {"message": f"Blog type {blog_type}"}
 
 
-@app.get("/blogs/{blog_id}", status_code=status.HTTP_200_OK, tags=["blogs"])
+@app.get(
+    "/blogs/{blog_id}",
+    status_code=status.HTTP_200_OK,
+    tags=["blogs"],
+)
 def get_blog(blog_id: int, response: Response):
     if blog_id > 5:
         response.status_code = status.HTTP_404_NOT_FOUND
@@ -56,6 +60,7 @@ def get_blog(blog_id: int, response: Response):
     tags=["blogs"],
     summary="Retrieve all blogs",
     description="This api call simulates fetching all blogs",
+    response_description="The list of blogs",
 )
 def get_all_blogs(page=1, page_size: Optional[int] = None):
     return {"message": f"All {page_size} blogs on page {page}"}
