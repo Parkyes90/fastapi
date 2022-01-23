@@ -25,6 +25,14 @@ def get_comment(
     valid: bool = True,
     username: Optional[str] = None,
 ):
+    """
+    Simulates retrieving a comment of a blog
+    - :param blog_id: mandatory path parameter
+    - :param comment_id: mandatory path parameter
+    - :param valid: optional query parameter
+    - :param username: optional query parameter
+    - :return: string
+    """
     return {
         "message": f"blog_id {blog_id}, comment_id {comment_id}, valid {valid}, username: {username}"
     }
@@ -43,7 +51,12 @@ def get_blog(blog_id: int, response: Response):
     return {"message": f"Blog with id {blog_id}"}
 
 
-@app.get("/blogs", tags=["blogs"])
+@app.get(
+    "/blogs",
+    tags=["blogs"],
+    summary="Retrieve all blogs",
+    description="This api call simulates fetching all blogs",
+)
 def get_all_blogs(page=1, page_size: Optional[int] = None):
     return {"message": f"All {page_size} blogs on page {page}"}
 
