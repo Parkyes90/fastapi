@@ -1,7 +1,8 @@
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 from enum import Enum
+
 
 app = FastAPI()
 
@@ -34,8 +35,11 @@ def get_blog_type(blog_type: BlogType):
     return {"message": f"Blog type {blog_type}"}
 
 
-@app.get("/blogs/{blog_id}")
-def get_blog(blog_id: int):
+@app.get("/blogs/{blog_id}", status_code=status.HTTP_200_OK)
+def get_blog(blog_id: int, response: Response):
+    if blog_id > 5:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"error": f"Blog {blog_id} not found"}
     return {"message": f"Blog with id {blog_id}"}
 
 
