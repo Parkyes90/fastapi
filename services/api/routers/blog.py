@@ -51,3 +51,8 @@ def get_blog(blog_id: int, response: Response):
 )
 def get_all_blogs(page=1, page_size: Optional[int] = None):
     return {"message": f"All {page_size} blogs on page {page}"}
+
+
+@router.post("")
+def create_blog():
+    return {"message": "hi"}
