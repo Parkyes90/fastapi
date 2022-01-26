@@ -58,4 +58,4 @@ def get_all_blogs(page=1, page_size: Optional[int] = None):
     response_model=ResponseModel[BlogModel],
 )
 def create_blog(blog: BlogModel):
-    return {"data": blog}
+    return ResponseModel[BlogModel](data=blog)
