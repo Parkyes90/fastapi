@@ -2,7 +2,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Response, status
 
-from schemas.blog import BlogType
+from schemas.blog import BlogType, BlogModel, ResponseModel
 
 router = APIRouter(prefix="/blogs", tags=["blogs"])
 
@@ -53,6 +53,9 @@ def get_all_blogs(page=1, page_size: Optional[int] = None):
     return {"message": f"All {page_size} blogs on page {page}"}
 
 
-@router.post("")
-def create_blog():
-    return {"message": "hi"}
+@router.post(
+    "",
+    response_model=ResponseModel[BlogModel],
+)
+def create_blog(blog: BlogModel):
+    return {"data": blog}
