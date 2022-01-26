@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, Response, status, Query
 
 from schemas.blog import BlogType, BlogModel, ResponseModel
 
@@ -59,3 +59,22 @@ def get_all_blogs(page=1, page_size: Optional[int] = None):
 )
 def create_blog(blog: BlogModel):
     return ResponseModel[BlogModel](data=blog)
+
+
+@router.post("/{blog_id}/comments", tags=["comments"])
+def create_comment(
+    blog_id: int = Query(
+        None,
+        title="Id of blog",
+        description="Some description",
+        alias="blogId",
+    ),
+    comment_content: str = Query(
+        None,
+        title="content of content",
+        description="Some description",
+        alias="commentContent",
+        deprecated=True,
+    ),
+):
+    return {"blog_id": blog_id}
