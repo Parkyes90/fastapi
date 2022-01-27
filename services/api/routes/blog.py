@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from fastapi import APIRouter, Response, status, Query, Body
 
@@ -72,5 +72,6 @@ def create_comment(
         deprecated=True,
     ),
     content: str = Body(..., min_length=10, regex="^[a-z\\s]*$"),
+    v: Optional[List[str]] = Query(["1.0", "1.1", "1.2"]),
 ):
-    return {"blog_id": blog_id, "content": content}
+    return {"blog_id": blog_id, "content": content, "version": v}
