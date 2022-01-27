@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import APIRouter, Response, status, Query
+from fastapi import APIRouter, Response, status, Query, Body
 
 from schemas.blog import BlogType, BlogModel, ResponseModel
 
@@ -63,12 +63,7 @@ def create_blog(blog: BlogModel):
 
 @router.post("/{blog_id}/comments", tags=["comments"])
 def create_comment(
-    blog_id: int = Query(
-        None,
-        title="Id of blog",
-        description="Some description",
-        alias="blogId",
-    ),
+    blog_id: int,
     comment_content: str = Query(
         None,
         title="content of content",
@@ -76,5 +71,6 @@ def create_comment(
         alias="commentContent",
         deprecated=True,
     ),
+    content: str = Body(..., min_length=10, regex="^[a-z\\s]*$"),
 ):
-    return {"blog_id": blog_id}
+    return {"blog_id": blog_id, "content": content}
