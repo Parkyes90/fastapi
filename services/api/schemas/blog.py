@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional, Generic, TypeVar
+from typing import Optional, Generic, TypeVar, List, Dict
 
 from pydantic import BaseModel, validator
 from pydantic.generics import GenericModel
@@ -22,6 +22,8 @@ class BlogModel(BaseModel):
     title: str
     content: str
     published: Optional[bool]
+    tags: List[str] = []
+    metadata: Dict[str, str] = {"key1": "val1"}
 
 
 class ResponseModel(GenericModel, Generic[DataT]):
