@@ -18,12 +18,18 @@ class BlogType(str, Enum):
     howto = "howto"
 
 
+class Image(BaseModel):
+    url: str
+    alias: str
+
+
 class BlogModel(BaseModel):
     title: str
     content: str
     published: Optional[bool]
     tags: List[str] = []
     metadata: Dict[str, str] = {"key1": "val1"}
+    image: Optional[Image] = None
 
 
 class ResponseModel(GenericModel, Generic[DataT]):
