@@ -1,10 +1,14 @@
 from typing import Optional, List
 
-from fastapi import APIRouter, Response, status, Query, Body, Path
+from fastapi import APIRouter, Response, status, Query, Body, Path, Depends
 
 from schemas.blog import BlogType, BlogModel, ResponseModel
 
 router = APIRouter(prefix="/blogs", tags=["blogs"])
+
+
+def required_functionality():
+    return {"message": "hi"}
 
 
 @router.get("/{blog_id}/comments/{comment_id}", tags=["comments"])
@@ -73,5 +77,11 @@ def create_comment(
     ),
     content: str = Body(..., min_length=10, regex="^[a-z\\s]*$"),
     v: Optional[List[str]] = Query(["1.0", "1.1", "1.2"]),
+    req_parameters: dict = Depends(required_functionality),
 ):
-    return {"blog_id": blog_id, "content": content, "version": v}
+    return {
+        "blog_id": blog_id,
+        "content": content,
+        "version": v,
+        "req": req_parameters,
+    }
