@@ -6,6 +6,8 @@ ENV USER=api \
 ENV USER_BIN_PATH=${HOME}/.local/bin
 ENV PATH $PATH:${USER_BIN_PATH}
 
+RUN apk add build-base libffi-dev
+
 # group
 RUN addgroup $USER
 
