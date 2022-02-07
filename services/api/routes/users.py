@@ -23,3 +23,10 @@ def create_user(request: UserBase, db: Session = Depends(get_db)):
 )
 def list_users(db: Session = Depends(get_db)):
     return users.get_users(db)
+
+
+@router.get(
+    "/{user_id}", status_code=status.HTTP_200_OK, response_model=UserDisplay
+)
+def retrieve_user(user_id: int, db: Session = Depends(get_db)):
+    return users.get_user(db, user_id)
