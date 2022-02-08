@@ -23,3 +23,16 @@ def get_users(db: Session):
 
 def get_user(db: Session, user_id: int):
     return db.query(User).filter(User.id == user_id).first()
+
+
+def update_user(db: Session, user_id: int, request: UserBase):
+    user = db.query(User).filter(User.id == user_id)
+    user.update(
+        {
+            User.username: request.username,
+            User.email: request.email,
+            User.password: PasswordHash(request.password).bcrypt(),
+        }
+    )
+    db.commit()
+    return user.first()
