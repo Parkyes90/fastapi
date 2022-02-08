@@ -39,3 +39,8 @@ def retrieve_user(
     user_id: int, request: UserBase, db: Session = Depends(get_db)
 ):
     return users.update_user(db, user_id, request)
+
+
+@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+def retrieve_user(user_id: int, db: Session = Depends(get_db)):
+    return users.destroy_user(db, user_id)
