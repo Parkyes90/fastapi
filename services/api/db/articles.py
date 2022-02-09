@@ -15,3 +15,11 @@ def create_article(db: Session, request: Article):
     db.commit()
     db.refresh(new_article)
     return new_article
+
+
+def get_article(db: Session, article_id: int):
+    return (
+        db.query(models.Article)
+        .filter(models.Article.id == article_id)
+        .first()
+    )

@@ -19,6 +19,20 @@ class ArticleDisplay(BaseModel):
         orm_mode = True
 
 
+class UserDetail(BaseModel):
+    id: int
+    username: str
+    email: str
+
+    class Config:
+        orm_mode = True
+
+
+class ArticleDetail(ArticleDisplay):
+    content: str
+    user: UserDetail
+
+
 class UserBase(BaseModel):
     username: str
     email: str
