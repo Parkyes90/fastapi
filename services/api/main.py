@@ -4,10 +4,12 @@ from db import models
 from db.database import engine
 from routes.blog import router as blog_router
 from routes.users import router as users_router
+from routes.articles import router as articles_router
 
 app = FastAPI()
 app.include_router(blog_router)
 app.include_router(users_router)
+app.include_router(articles_router)
 
 
 @app.get("/")
