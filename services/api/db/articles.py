@@ -1,3 +1,4 @@
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from db import models
@@ -18,8 +19,16 @@ def create_article(db: Session, request: Article):
 
 
 def get_article(db: Session, article_id: int):
-    return (
+    article = (
         db.query(models.Article)
         .filter(models.Article.id == article_id)
         .first()
     )
+
+    if not article:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Article with id {article_id} not found",
+        )
+
+    return article
