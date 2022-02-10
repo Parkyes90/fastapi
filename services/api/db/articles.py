@@ -3,9 +3,13 @@ from sqlalchemy.orm import Session
 
 from db import models
 from schemas.users import Article
+from utils.exceptions import StoryException
 
 
 def create_article(db: Session, request: Article):
+    if request.content.startswith("Once upon a time"):
+        raise StoryException("No stories please")
+
     new_article = models.Article(
         title=request.title,
         content=request.content,
