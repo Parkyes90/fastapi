@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, responses, status
+from fastapi import FastAPI, Request, responses, status, HTTPException
 
 from db import models
 from db.database import engine
@@ -23,6 +23,11 @@ def story_exception_handler(request: Request, exc: StoryException):
     return responses.JSONResponse(
         status_code=status.HTTP_418_IM_A_TEAPOT, content={"detail": exc.name}
     )
+
+
+@app.exception_handler(HTTPException)
+def custom_exception_handler(request: Request, exc: HTTPException):
+    return responses.PlainTextResponse(exc.detail, status_code=exc.status_code)
 
 
 models.Base.metadata.create_all(engine)
