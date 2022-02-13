@@ -1,4 +1,6 @@
-from fastapi import APIRouter, status
+from typing import Optional, List
+
+from fastapi import APIRouter, status, Header
 from fastapi.responses import Response, HTMLResponse, PlainTextResponse
 
 router = APIRouter(prefix="/products", tags=["products"])
@@ -8,6 +10,13 @@ products = ["watch", "camera", "phone"]
 @router.get("")
 def list_products():
     return Response(content="".join(products), media_type="text/plain")
+
+
+@router.get("/header")
+def products_with_header(
+    response: Response, header: Optional[List[str]] = Header(None)
+):
+    return products
 
 
 @router.get(
