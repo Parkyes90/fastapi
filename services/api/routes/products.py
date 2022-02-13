@@ -16,6 +16,7 @@ def list_products():
 def products_with_header(
     response: Response, header: Optional[List[str]] = Header(None)
 ):
+    response.headers["custom-response-header"] = ", ".join(header)
     return products
 
 
