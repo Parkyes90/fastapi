@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from fastapi import APIRouter, status, Header, Cookie
+from fastapi import APIRouter, status, Header, Cookie, Form
 from fastapi.responses import Response, HTMLResponse, PlainTextResponse
 
 router = APIRouter(prefix="/products", tags=["products"])
@@ -64,3 +64,9 @@ def retrieve_product(product_id: int):
     <div class="product">{product}</div>
     """
     return HTMLResponse(content=output, media_type="text/html")
+
+
+@router.post("")
+def create_product(name: str = Form(...)):
+    products.append(name)
+    return products
