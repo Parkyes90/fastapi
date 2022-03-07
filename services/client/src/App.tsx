@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
 
 function App() {
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/products").then(res => {
+      setData(res.data)
+    })
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +25,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {data}
         </a>
       </header>
     </div>
