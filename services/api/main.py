@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, responses, status, HTTPException
+from starlette.middleware.cors import CORSMiddleware
 
 from db import models
 from db.database import engine
@@ -9,6 +10,13 @@ from routes.products import router as products_router
 from utils.exceptions import StoryException
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(blog_router)
 app.include_router(users_router)
 app.include_router(articles_router)
